@@ -1,0 +1,44 @@
+// data base design
+
+CREATE TABLE flight(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    airline_id INT NOT NULL,
+    airline_name VARCHAR(255),
+    from_loc  VARCHAR(255),
+    to_loc  VARCHAR(255),
+    departure_time TIME,
+    departure_date DATE,
+    arrival_time TIME,
+    arrival_date DATE,
+    duration TIME,
+    total_seats INT,
+    available_seats INT,
+    price INT
+    );
+
+CREATE TABLE flight_details(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	from_loc  VARCHAR(255),
+    	to_loc  VARCHAR(255),
+    	departure_time TIME,
+    	departure_date DATE,
+    	duration TIME,
+	available_seats INT,
+	price INT
+);
+
+CREATE TABLE ticket(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    seat VARCHAR(255),
+    profile_id INT,
+    FOREIGN KEY(profile_id) REFERENCES user_profile(id),
+    
+    flight_id INT,
+    FOREIGN KEY(flight_id) REFERENCES flight(id),
+    
+    flight_details_id INT,
+    FOREIGN KEY(flight_details_id) REFERENCES flight_details(id)
+    );
+
+//next idea without login user ticket_information
+(t_fname, t_lname, t_dateOfBirth, t_passportNumber, t_passportExpiryDate, t_city, t_country, t_email, t_number, ticket_id)
